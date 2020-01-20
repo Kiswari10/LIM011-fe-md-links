@@ -1,0 +1,46 @@
+{
+  "name": "lim011-fe-md-links",
+  "version": "1.0.0",
+  "description": "library to extract, read and validate Markdown Links",
+  "main": "src/main.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "eslint": "eslint --ext .js src/ test/",
+    "pretest": "npm run eslint",
+    "test": "jest --coverage",
+    "open-coverage-report": "opener ./coverage/lcov-report/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kiswari10/LIM011-fe-md-links.git"
+  },
+  "keywords": [
+    "javascript",
+    "jest",
+    "md-links",
+    "markdown",
+    "node"
+  ],
+  "author": "Kiswari Martinez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Kiswari10/LIM011-fe-md-links/issues"
+  },
+  "homepage": "https://github.com/Kiswari10/LIM011-fe-md-links#readme",
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-transform-modules-commonjs": "^7.2.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^24.8.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^22.1.2",
+    "jest": "^24.8.0",
+    "regenerator-runtime": "^0.13.1",
+    "serve": "^11.0.2"
+  }
+}
