@@ -6,7 +6,7 @@ describe('typeOfPath', () => {
     expect(route.typeOfPath('/home/kiswari/Desktop/firestore_prueba')).toBe('/home/kiswari/Desktop/firestore_prueba');
   });
   it('debería retornar una ruta absoluta al pasarle una ruta relativa', () => {
-    expect(route.typeOfPath('./')).toBe('/home/kiswari/Desktop/MD-Links/LIM011-fe-md-links');
+    expect(route.typeOfPath('./')).toBe(process.cwd());
   });
 });
 
@@ -25,5 +25,11 @@ describe('isMD', () => {
   });
   it('debería retornar false si la ruta es de un archivo con extension diferente a .md', () => {
     expect(route.isMD('/home/kiswari/Desktop/firestore_prueba/app.js')).toBe(false);
+  });
+});
+
+describe('readDirectory', () => {
+  it('debería retornar un array con el contenido de la carpeta de la ruta', () => {
+    expect(route.readDirectory('/home/kiswari/Desktop/pruebasKis/src')).toEqual(['cli.js', 'main.js', 'md-links.js']);
   });
 });
