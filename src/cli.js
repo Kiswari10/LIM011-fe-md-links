@@ -1,12 +1,22 @@
 #!/usr/bin/env node
 
+const mdLinks = require('./md-links');
 /* eslint-disable no-console */
 
-const route = require('./main');
-
 const path = process.argv[2];
+const options = process.argv[3];
 
-// console.log(route.typeOfPath(path));
-// console.log(route.isFile(path));
-console.log(route.isMD(path));
-// console.log(path);
+mdLinks(path, options)
+  .then((response) => {
+    console.log(response);
+  });
+
+
+/* const [,, ...options] = process.argv;
+// const options = process.argv[2];
+console.log(`${options}`); */
+
+/* mdLinks(path, { validate: true })
+  .then((response) => {
+    console.log(response);
+  }); */

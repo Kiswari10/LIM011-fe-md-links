@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs');
+const marked = require('marked');
 
 const typeOfPath = (route) => {
   if (path.isAbsolute(route) === true) {
@@ -9,7 +10,6 @@ const typeOfPath = (route) => {
 };
 
 const isFile = route => fs.statSync(route).isFile();
-
 
 const isMD = (route) => {
   if (path.extname(route) === '.md') {
@@ -23,8 +23,8 @@ const readDirectory = route => fs.readdirSync(route);
 const saveRoutesOfFiles = (route) => {
   let arrayOfFiles = [];
   const newRoute = typeOfPath(route);
-  if (isFile(newRoute) === true) {
-    if (isMD(newRoute) === true) {
+  if (isFile(newRoute)) {
+    if (isMD(newRoute)) {
       arrayOfFiles.push(newRoute);
     }
   } else {
@@ -38,10 +38,27 @@ const saveRoutesOfFiles = (route) => {
   return arrayOfFiles;
 };
 
+const readFile = route => fs.readFileSync(route, 'utf-8');
+
+const getAllLinks = (route) => {
+  const render = new marked.Renderer();
+  const array = [];
+  const data = saveRoutesOfFiles(route);
+  data.forEach((File) => {
+    render.link = (Href, title, Text) => {
+      array.push({ href: Href, text: Text, file: File });
+    };
+    marked(readFile(File), { renderer: render });
+  });
+  return array;
+};
+
 module.exports = {
   typeOfPath,
   isFile,
   isMD,
   readDirectory,
   saveRoutesOfFiles,
+  readFile,
+  getAllLinks,
 };

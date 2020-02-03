@@ -42,5 +42,12 @@
     "jest": "^24.8.0",
     "regenerator-runtime": "^0.13.1",
     "serve": "^11.0.2"
+  },
+  "dependencies": {
+    "marked": "^0.8.0",
+    "node-fetch": "^2.6.0"
+  },
+  "bin": {
+    "md-links": "src/cli.js"
   }
 }
