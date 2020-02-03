@@ -1,5 +1,9 @@
 const path = require('path');
 const route = require('../src/main');
+const validateLinks = require('../src/validate');
+const stats = require('../src/stats');
+const mdLinksApi = require('../src/md-linksAPI');
+const mdLinks = require('../src/md-links');
 
 describe('typeOfPath', () => {
   it('debería retornar una ruta absoluta', () => {
@@ -39,7 +43,7 @@ describe('readDirectory', () => {
 const secondOutput = [path.join(process.cwd(), 'test', 'folder_example', 'folder_one', 'links.md'), path.join(process.cwd(), 'test', 'folder_example', 'readme.md')];
 
 describe('saveRoutesOfFiles', () => {
-  it('debería retornar un array con el contenido de la carpeta de la ruta', () => {
+  it('debería retornar un array con la(s) ruta(s) de lo(s) archivo(s) markdown', () => {
     expect(route.saveRoutesOfFiles(path.join(process.cwd(), 'test', 'folder_example'))).toEqual(secondOutput);
   });
 });
@@ -60,48 +64,191 @@ const fourthOutput = [{
   href: 'https://es.wikipedia.org/wiki/Markdown',
   text: 'Markdown definition',
   file:
-     '/home/kiswari/Desktop/MD-Links/LIM011-fe-md-links/test/folder_example/folder_one/links.md',
+        path.join(process.cwd(), 'test', 'folder_example', 'folder_one', 'links.md'),
 },
 {
   href: 'https://nodejs.org/docs/latest-v0.10.x/api/modules.html',
   text: 'módulos (CommonJS)',
   file:
-     '/home/kiswari/Desktop/MD-Links/LIM011-fe-md-links/test/folder_example/folder_one/links.md',
+        path.join(process.cwd(), 'test', 'folder_example', 'folder_one', 'links.md'),
 },
 {
   href: 'https://nodejs.org/api/fs.html',
   text: 'file system',
   file:
-     '/home/kiswari/Desktop/MD-Links/LIM011-fe-md-links/test/folder_example/folder_one/links.md',
+        path.join(process.cwd(), 'test', 'folder_example', 'folder_one', 'links.md'),
 },
 {
   href: 'https://nodejs.org/api/path.html',
   text: 'path',
   file:
-     '/home/kiswari/Desktop/MD-Links/LIM011-fe-md-links/test/folder_example/folder_one/links.md',
+        path.join(process.cwd(), 'test', 'folder_example', 'folder_one', 'links.md'),
+},
+{
+  href:
+ 'https://nodejs.org/api/http.html#http_http_get_options_callback',
+  text: 'http.get',
+  file:
+        path.join(process.cwd(), 'test', 'folder_example', 'folder_one', 'links.md'),
+},
+{
+  href: 'https://es.wikipedia.org/wiki/Markdown',
+  text: 'Markdown',
+  file:
+        path.join(process.cwd(), 'test', 'folder_example', 'readme.md'),
+},
+{
+  href: 'https://nodejs.org/hi',
+  text: 'Node.js',
+  file:
+        path.join(process.cwd(), 'test', 'folder_example', 'readme.md'),
+}];
+
+describe('getAllLinks', () => {
+  it('debería retornar un array de objetos con 3 propiedades: href, text, file', () => {
+    expect(route.getAllLinks(path.join(process.cwd(), 'test', 'folder_example'))).toEqual(fourthOutput);
+  });
+});
+
+const fifthOutput = [{
+  href: 'https://es.wikipedia.org/wiki/Markdown',
+  text: 'Markdown definition',
+  file:
+        path.join(process.cwd(), 'test', 'folder_example', 'folder_one', 'links.md'),
+  status: 200,
+  status_message: 'ok',
+},
+{
+  href: 'https://nodejs.org/docs/latest-v0.10.x/api/modules.html',
+  text: 'módulos (CommonJS)',
+  file:
+        path.join(process.cwd(), 'test', 'folder_example', 'folder_one', 'links.md'),
+  status: 200,
+  status_message: 'ok',
+},
+{
+  href: 'https://nodejs.org/api/fs.html',
+  text: 'file system',
+  file:
+        path.join(process.cwd(), 'test', 'folder_example', 'folder_one', 'links.md'),
+  status: 200,
+  status_message: 'ok',
+},
+{
+  href: 'https://nodejs.org/api/path.html',
+  text: 'path',
+  file:
+        path.join(process.cwd(), 'test', 'folder_example', 'folder_one', 'links.md'),
+  status: 200,
+  status_message: 'ok',
 },
 {
   href:
      'https://nodejs.org/api/http.html#http_http_get_options_callback',
   text: 'http.get',
   file:
-     '/home/kiswari/Desktop/MD-Links/LIM011-fe-md-links/test/folder_example/folder_one/links.md',
+        path.join(process.cwd(), 'test', 'folder_example', 'folder_one', 'links.md'),
+  status: 200,
+  status_message: 'ok',
 },
 {
   href: 'https://es.wikipedia.org/wiki/Markdown',
   text: 'Markdown',
   file:
-     '/home/kiswari/Desktop/MD-Links/LIM011-fe-md-links/test/folder_example/readme.md',
+        path.join(process.cwd(), 'test', 'folder_example', 'readme.md'),
+  status: 200,
+  status_message: 'ok',
 },
 {
   href: 'https://nodejs.org/hi',
   text: 'Node.js',
   file:
-     '/home/kiswari/Desktop/MD-Links/LIM011-fe-md-links/test/folder_example/readme.md',
+        path.join(process.cwd(), 'test', 'folder_example', 'readme.md'),
+  status: 404,
+  status_message: 'fail',
 }];
 
-describe('getAllLinks', () => {
-  it('debería retornar el un array ', () => {
-    expect(route.getAllLinks(path.join(process.cwd(), 'test', 'folder_example'))).toEqual(fourthOutput);
+describe('validateLinks', () => {
+  it('debería retornar un array de objetos con 5 propiedades: href, text, file, mensaje y status ', (done) => {
+    expect.assertions(1);
+    return validateLinks(path.join(process.cwd(), 'test', 'folder_example')).then((data) => {
+      expect(data).toEqual(fifthOutput);
+      done();
+    });
+  });
+});
+
+const sixthOutput = { total: 7, uniques: 6, broken: 1 };
+
+describe('stats', () => {
+  it('debería retornar un objeto con 3 propiedades: total, uniques y broken', (done) => {
+    expect.assertions(1);
+    return stats(path.join(process.cwd(), 'test', 'folder_example')).then((data) => {
+      expect(data).toEqual(sixthOutput);
+      done();
+    });
+  });
+});
+
+describe('mdLinksApi', () => {
+  it('debería retornar un array de objetos con 5 propiedades', (done) => {
+    expect.assertions(1);
+    return mdLinksApi(path.join(process.cwd(), 'test', 'folder_example'), { validate: true }).then((data) => {
+      expect(data).toEqual(fifthOutput);
+      done();
+    });
+  });
+  it('debería retornar un array de objetos con 3 propiedades', (done) => {
+    expect.assertions(1);
+    return mdLinksApi(path.join(process.cwd(), 'test', 'folder_example'), { validate: false }).then((data) => {
+      expect(data).toEqual(fourthOutput);
+      done();
+    });
+  });
+});
+
+const seventhOutput = `${path.join(process.cwd(), 'test', 'folder_example', 'readme.md')} https://es.wikipedia.org/wiki/Markdown Markdown\n${
+  path.join(process.cwd(), 'test', 'folder_example', 'readme.md')} https://nodejs.org/hi Node.js\n`
++ '';
+
+const eighthOutput = `${path.join(process.cwd(), 'test', 'folder_example', 'readme.md')} https://es.wikipedia.org/wiki/Markdown ok 200 Markdown\n${
+  path.join(process.cwd(), 'test', 'folder_example', 'readme.md')} https://nodejs.org/hi fail 404 Node.js\n`
++ '';
+
+const ninthOutput = 'Total: 2\n'
++ 'Unique: 2';
+
+const tenthOutput = 'Total: 2\n'
++ 'Unique: 2\n'
++ 'Broken: 1';
+
+describe('mdLinks', () => {
+  it('debería retornar la informacion del link, el texto y el archivo al cual pertenece', (done) => {
+    expect.assertions(1);
+    return mdLinks(path.join(process.cwd(), 'test', 'folder_example', 'readme.md')).then((data) => {
+      expect(data).toEqual(seventhOutput);
+      done();
+    });
+  });
+  it('debería retornar la informacion del link, el texto, el archivo al cual pertenece y su status', (done) => {
+    expect.assertions(1);
+    return mdLinks(path.join(process.cwd(), 'test', 'folder_example', 'readme.md'), '--validate').then((data) => {
+      expect(data).toEqual(eighthOutput);
+      done();
+    });
+  });
+  it('debería retornar estadisticas con la cantidad de link totales y unicos', (done) => {
+    expect.assertions(1);
+    return mdLinks(path.join(process.cwd(), 'test', 'folder_example', 'readme.md'), '--stats').then((data) => {
+      expect(data).toEqual(ninthOutput);
+      done();
+    });
+  });
+  it('debería retornar estadisticas con la cantidad de link totales, unicos y rotos', (done) => {
+    expect.assertions(1);
+    return mdLinks(path.join(process.cwd(), 'test', 'folder_example', 'readme.md'), '--stats --validate').then((data) => {
+      expect(data).toEqual(tenthOutput);
+      done();
+    });
   });
 });
