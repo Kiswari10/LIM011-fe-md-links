@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const allFunctions = require('./main');
+const allFunctions = require('./path_fs_marked');
 
 const validateLinks = (route) => {
   const data = allFunctions.getAllLinks(route);

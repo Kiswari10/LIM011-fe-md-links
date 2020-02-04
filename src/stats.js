@@ -1,6 +1,6 @@
-const validateLinks = require('./validate');
+const mdLinks = require('./md-links');
 
-const stats = path => validateLinks(path)
+const stats = path => mdLinks(path, { validate: true })
   .then((data) => {
     const arrayOfFails = data.filter(element => element.status_message === 'fail');
     const arrayOfhref = [];

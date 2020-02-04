@@ -2,7 +2,7 @@
   "name": "lim011-fe-md-links",
   "version": "1.0.0",
   "description": "library to extract, read and validate Markdown Links",
-  "main": "src/main.js",
+  "main": "src/md-links.js",
   "directories": {
     "lib": "lib",
     "test": "test"
@@ -24,7 +24,7 @@
     "markdown",
     "node"
   ],
-  "author": "Kiswari Martinez",
+  "author": "Kiswari Martinez Atauje",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Kiswari10/LIM011-fe-md-links/issues"

@@ -1,39 +1,17 @@
+const route = require('./path_fs_marked');
 const validateLinks = require('./validate');
-const stats = require('./stats');
 
 const mdLinks = (path, options) => {
-  if (options === '--validate') {
-    return validateLinks(path)
-      .then((data) => {
-        let string = '';
-        data.forEach((element) => {
-          string += `${element.file} ${element.href} ${element.status_message} ${element.status} ${element.text}\n`;
-        });
-        return string;
-      });
+  const allLinks = new Promise((resolve) => {
+    resolve(route.getAllLinks(path));
+  });
+  if (options === undefined) {
+    return allLinks;
   }
-  if (options === '--stats') {
-    return stats(path)
-      .then((data) => {
-        const string = `Total: ${data.total}\nUnique: ${data.uniques}`;
-        return string;
-      });
+  if (options.validate === true) {
+    return validateLinks(path);
   }
-  if (options === '--stats --validate') {
-    return stats(path)
-      .then((data) => {
-        const string = `Total: ${data.total}\nUnique: ${data.uniques}\nBroken: ${data.broken}`;
-        return string;
-      });
-  }
-  return validateLinks(path)
-    .then((data) => {
-      let string = '';
-      data.forEach((element) => {
-        string += `${element.file} ${element.href} ${element.text}\n`;
-      });
-      return string;
-    });
+  return allLinks;
 };
 
 module.exports = mdLinks;

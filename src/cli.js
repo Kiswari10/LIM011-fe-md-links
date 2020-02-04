@@ -1,22 +1,13 @@
 #!/usr/bin/env node
 
-const mdLinks = require('./md-links');
+const mdLinks = require('./functionCli');
 /* eslint-disable no-console */
 
 const path = process.argv[2];
-const options = process.argv[3];
+const [,,, ...option] = process.argv;
+const options = option.join(' ');
 
 mdLinks(path, options)
   .then((response) => {
     console.log(response);
   });
-
-
-/* const [,, ...options] = process.argv;
-// const options = process.argv[2];
-console.log(`${options}`); */
-
-/* mdLinks(path, { validate: true })
-  .then((response) => {
-    console.log(response);
-  }); */

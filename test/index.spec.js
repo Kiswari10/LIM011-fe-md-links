@@ -1,16 +1,16 @@
 const path = require('path');
-const route = require('../src/main');
+const route = require('../src/path_fs_marked');
 const validateLinks = require('../src/validate');
 const stats = require('../src/stats');
-const mdLinksApi = require('../src/md-linksAPI');
 const mdLinks = require('../src/md-links');
+const functionCli = require('../src/functionCli');
 
-describe('typeOfPath', () => {
+describe('getAbsolutePath', () => {
   it('debería retornar una ruta absoluta', () => {
-    expect(route.typeOfPath(path.join(process.cwd(), 'src'))).toBe(path.join(process.cwd(), 'src'));
+    expect(route.getAbsolutePath(path.join(process.cwd(), 'src'))).toBe(path.join(process.cwd(), 'src'));
   });
   it('debería retornar una ruta absoluta al pasarle una ruta relativa', () => {
-    expect(route.typeOfPath('./')).toBe(process.cwd());
+    expect(route.getAbsolutePath('./')).toBe(process.cwd());
   });
 });
 
@@ -190,17 +190,24 @@ describe('stats', () => {
   });
 });
 
-describe('mdLinksApi', () => {
+describe('mdLinks', () => {
   it('debería retornar un array de objetos con 5 propiedades', (done) => {
     expect.assertions(1);
-    return mdLinksApi(path.join(process.cwd(), 'test', 'folder_example'), { validate: true }).then((data) => {
+    return mdLinks(path.join(process.cwd(), 'test', 'folder_example'), { validate: true }).then((data) => {
       expect(data).toEqual(fifthOutput);
       done();
     });
   });
   it('debería retornar un array de objetos con 3 propiedades', (done) => {
     expect.assertions(1);
-    return mdLinksApi(path.join(process.cwd(), 'test', 'folder_example'), { validate: false }).then((data) => {
+    return mdLinks(path.join(process.cwd(), 'test', 'folder_example'), { validate: false }).then((data) => {
+      expect(data).toEqual(fourthOutput);
+      done();
+    });
+  });
+  it('debería retornar un array de objetos con 3 propiedades por defecto', (done) => {
+    expect.assertions(1);
+    return mdLinks(path.join(process.cwd(), 'test', 'folder_example')).then((data) => {
       expect(data).toEqual(fourthOutput);
       done();
     });
@@ -222,31 +229,31 @@ const tenthOutput = 'Total: 2\n'
 + 'Unique: 2\n'
 + 'Broken: 1';
 
-describe('mdLinks', () => {
+describe('functionCli', () => {
   it('debería retornar la informacion del link, el texto y el archivo al cual pertenece', (done) => {
     expect.assertions(1);
-    return mdLinks(path.join(process.cwd(), 'test', 'folder_example', 'readme.md')).then((data) => {
+    return functionCli(path.join(process.cwd(), 'test', 'folder_example', 'readme.md')).then((data) => {
       expect(data).toEqual(seventhOutput);
       done();
     });
   });
   it('debería retornar la informacion del link, el texto, el archivo al cual pertenece y su status', (done) => {
     expect.assertions(1);
-    return mdLinks(path.join(process.cwd(), 'test', 'folder_example', 'readme.md'), '--validate').then((data) => {
+    return functionCli(path.join(process.cwd(), 'test', 'folder_example', 'readme.md'), '--validate').then((data) => {
       expect(data).toEqual(eighthOutput);
       done();
     });
   });
   it('debería retornar estadisticas con la cantidad de link totales y unicos', (done) => {
     expect.assertions(1);
-    return mdLinks(path.join(process.cwd(), 'test', 'folder_example', 'readme.md'), '--stats').then((data) => {
+    return functionCli(path.join(process.cwd(), 'test', 'folder_example', 'readme.md'), '--stats').then((data) => {
       expect(data).toEqual(ninthOutput);
       done();
     });
   });
   it('debería retornar estadisticas con la cantidad de link totales, unicos y rotos', (done) => {
     expect.assertions(1);
-    return mdLinks(path.join(process.cwd(), 'test', 'folder_example', 'readme.md'), '--stats --validate').then((data) => {
+    return functionCli(path.join(process.cwd(), 'test', 'folder_example', 'readme.md'), '--stats --validate').then((data) => {
       expect(data).toEqual(tenthOutput);
       done();
     });
