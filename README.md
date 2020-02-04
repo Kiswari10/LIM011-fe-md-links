@@ -14,37 +14,37 @@ Md-links es una librería que se desarrolló con la finalidad de leer y analizar
 
 ## Diagrama de Flujo
 
-![Diagrama de flujo](https://github.com/Kiswari10/LIM011-fe-md-links/blob/master/img/Diagrama%20de%20flujo%20-%20Md%20links.png).
+![Diagrama de flujo](https://github.com/Kiswari10/LIM011-fe-md-links/blob/master/img/Diagrama%20de%20flujo%20-%20Md%20links.png)
 
 
 ## Planificación del proyecto
 
 ## Instalación y guía de uso de la librería
 
-### `1 - INSTALACIÓN`
+#### 1 - INSTALACIÓN
 
 Para comenzar a usar este proyecto, lo primero que debe hacer es instalar la librería. 
 Para ello ejecute en la terminal la siguiente línea de comando: 
 
 `npm install  kiswari10/md-links`
 
-### `2 - GUIA DE USO`
+#### 2 - GUÍA DE USO
 
 Esta libreria puede usarse de dos formas:
 
-#### `Importando el módulo con require para usarlo programáticamente:`
+##### Importando el módulo con require para usarlo programáticamente:
 
 ```js
 const mdLinks = require("md-linksAPI");
 ```
-#### `La aplicación se puede ejecutar de la siguiente manera a través de la terminal:`
+##### La aplicación se puede ejecutar de la siguiente manera a través de la terminal:
 
 `md-links <path-to-file> [options]`
 
 Donde:
 
-- Path: Es la ruta absoluta o relativa al archivo o directorio que se desea analizar.
-- Options: Se tiene las siguientes opciones para ejecutar en la linea de comando: `--validate`, `--stats`, o `--stats` y `--validate` juntos.
+- path-to-file: Es la ruta absoluta o relativa al archivo o directorio que se desea analizar.
+- Options: Se tiene las siguientes opciones para ejecutar en la linea de comando: `--validate`, `--stats`,`--stats` y `--validate` juntos.
 
 ## Documentación técnica de la librería
 
@@ -63,7 +63,7 @@ Donde:
 
 ##### Valor de retorno
 
-La función retorna una promesa (`Promise`) que resuelva a un arreglo
+La función retorna una promesa (`Promise`) que resuelve un arreglo
 (`Array`) de objetos (`Object`), donde cada objeto representa un link y contiene
 las siguientes propiedades:
 
@@ -75,25 +75,22 @@ las siguientes propiedades:
 
 ```js
 const mdLinks = require("md-links");
+```
+Retorno por defecto:
 
-mdLinks("./some/example.md")
-  .then(links => {
-    // => [{ href, text, file }]
-    console.log(data));
-  })
-  .catch(console.error);
+```js
+mdLinks('folder_example').then((data) => console.log(data));
+```
+O tambien puede usar la opcion de validate: false,
 
-mdLinks("./some/example.md", { validate: true })
-  .then(links => {
-    // => [{ href, text, file, status, ok }]
-  })
-  .catch(console.error);
+```js
+mdLinks('src', {validate: false}).then((data) => console.log(data));
+```
 
-mdLinks("./some/dir")
-  .then(links => {
-    // => [{ href, text, file }]
-  })
-  .catch(console.error);
+Para validación de los links:
+
+```js
+mdLinks('folder_example', {validate: true}).then((data) => console.log(data));
 ```
 
 ### CLI (Command Line Interface - Interfaz de Línea de Comando)
@@ -112,17 +109,17 @@ $ md-links ./some/example.md
 ./some/example.md http://google.com/ Google
 ```
 
-El comportamiento por defecto no debe validar si las URLs responden ok o no,
-solo debe identificar el archivo markdown (a partir de la ruta que recibe como
-argumento), analizar el archivo Markdown e imprimir los links que vaya
+El comportamiento por defecto no valida si las URLs responden ok o no,
+solo identifica el archivo markdown (a partir de la ruta que recibe como
+argumento), analiza el archivo Markdown e imprime los links que vaya
 encontrando, junto con la ruta del archivo donde aparece y el texto
-que hay dentro del link (truncado a 50 caracteres).
+que hay dentro del link.
 
 #### Options
 
 ##### `--validate`
 
-Si pasamos la opción `--validate`, el módulo debe hacer una petición HTTP para
+Si pasamos la opción `--validate`, el módulo hace una petición HTTP para
 averiguar si el link funciona o no. Si el link resulta en una redirección a una
 URL que responde ok, entonces consideraremos el link como ok.
 
