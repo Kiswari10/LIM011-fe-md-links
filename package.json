@@ -1,10 +1,9 @@
 {
-  "name": "lim011-fe-md-links",
+  "name": "md-links",
   "version": "1.0.0",
   "description": "library to extract, read and validate Markdown Links",
   "main": "src/md-links.js",
   "directories": {
-    "lib": "lib",
     "test": "test"
   },
   "scripts": {
