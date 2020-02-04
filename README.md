@@ -35,7 +35,7 @@ Esta libreria puede usarse de dos formas:
 ##### Importando el módulo con require para usarlo programáticamente:
 
 ```js
-const mdLinks = require("md-linksAPI");
+const mdLinks = require("md-links");
 ```
 ##### La aplicación se puede ejecutar de la siguiente manera a través de la terminal:
 
@@ -79,18 +79,18 @@ const mdLinks = require("md-links");
 Retorno por defecto:
 
 ```js
-mdLinks('folder_example').then((data) => console.log(data));
+mdLinks('test').then((data) => console.log(data));
 ```
 O tambien puede usar la opcion de validate: false,
 
 ```js
-mdLinks('src', {validate: false}).then((data) => console.log(data));
+mdLinks('test', {validate: false}).then((data) => console.log(data));
 ```
-
+En am
 Para validación de los links:
 
 ```js
-mdLinks('folder_example', {validate: true}).then((data) => console.log(data));
+mdLinks('test', {validate: true}).then((data) => console.log(data));
 ```
 
 ### CLI (Command Line Interface - Interfaz de Línea de Comando)
