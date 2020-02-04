@@ -10,11 +10,12 @@ Estos archivos `Markdown` normalmente contienen _links_ (vínculos/ligas) que
 muchas veces están rotos o ya no son válidos y eso perjudica mucho el valor de
 la información que se quiere compartir.
 
-Md-links es una librería que se desarrolló con la finalidad de leer y analizar archivos de formato Markdown ('.md) tomando en cuenta una ruta dada. Esta herramienta permite verificar los links que se encuentran dentro de los archivos y reportar estadísticas acerca del total de links, asi como la cantidad de links únicos y rotos. Esta librería se ha implentado usando [Node.js](https://nodejs.org/). 
+Md-links es una librería que se desarrolló con la finalidad de leer y analizar archivos de formato Markdown ('.md) tomando en cuenta una ruta dada. Esta herramienta permite verificar los links que se encuentran dentro de los archivos y reportar estadísticas acerca del total de links, asi como la cantidad de links únicos y rotos. Esta librería se ha implementado usando [Node.js](https://nodejs.org/). 
 
 ## Diagrama de Flujo
 
-![Diagrama de flujo](https://github.com/Kiswari10/LIM011-fe-md-links/blob/master/img/Diagramadeflujo-Mdlinks.png) 
+![Diagrama de flujo](https://github.com/Kiswari10/LIM011-fe-md-links/blob/master/img/Diagrama%20de%20flujo%20-%20Md%20links.png).
+
 
 ## Planificación del proyecto
 
