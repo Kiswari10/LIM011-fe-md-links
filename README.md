@@ -86,12 +86,16 @@ O tambien puede usar la opcion de validate: false,
 ```js
 mdLinks('test', {validate: false}).then((data) => console.log(data));
 ```
-En am
+En ambos casos el resultado es:
+
+![Resultado por defecto](https://github.com/Kiswari10/LIM011-fe-md-links/blob/master/img/mdLinks-whitoutValidate.png)
+
 Para validación de los links:
 
 ```js
 mdLinks('test', {validate: true}).then((data) => console.log(data));
 ```
+![Resultado con validación de links](https://github.com/Kiswari10/LIM011-fe-md-links/blob/master/img/mdLinks-withValidate.png)
 
 ### CLI (Command Line Interface - Interfaz de Línea de Comando)
 
@@ -102,12 +106,7 @@ manera a través de la terminal:
 
 Por ejemplo:
 
-```sh
-$ md-links ./some/example.md
-./some/example.md http://algo.com/2/3/ Link a algo
-./some/example.md https://otra-cosa.net/algun-doc.html algún doc
-./some/example.md http://google.com/ Google
-```
+![Resultado al ejecutar CLI](https://github.com/Kiswari10/LIM011-fe-md-links/blob/master/img/CLI.png)
 
 El comportamiento por defecto no valida si las URLs responden ok o no,
 solo identifica el archivo markdown (a partir de la ruta que recibe como
@@ -121,16 +120,11 @@ que hay dentro del link.
 
 Si pasamos la opción `--validate`, el módulo hace una petición HTTP para
 averiguar si el link funciona o no. Si el link resulta en una redirección a una
-URL que responde ok, entonces consideraremos el link como ok.
+URL que responde ok, entonces considera el link como ok.
 
 Por ejemplo:
 
-```sh13d99df067c1
-$ md-13d99df067c1
-./some/example.md http://algo.com/2/3/ ok 200 Link a algo
-./some/example.md https://otra-cosa.net/algun-doc.html fail 404 algún doc
-./some/example.md http://google.com/ ok 301 Google
-```
+![Resultado al ejecutar --validate](https://github.com/Kiswari10/LIM011-fe-md-links/blob/master/img/CLI-withValidate.png)
 
 Vemos que el _output_ en este caso incluye la palabra `ok` o `fail` después de
 la URL, así como el status de la respuesta recibida a la petición HTTP a dicha
@@ -141,21 +135,12 @@ URL.
 Si pasamos la opción `--stats` el output (salida) será un texto con estadísticas
 básicas sobre los links.
 
-```sh
-$ md-links ./some/example.md --stats
-Total: 3
-Unique: 3
-```
+![Resultado al ejecutar --stats](https://github.com/Kiswari10/LIM011-fe-md-links/blob/master/img/CLI-withStats.png)
 
 También podemos combinar `--stats` y `--validate` para obtener estadísticas que
 necesiten de los resultados de la validación.
 
-```sh
-$ md-links ./some/example.md --stats --validate
-Total: 3
-Unique: 3
-Broken: 1
-```
+![Resultado al ejecutar --stats --validate](https://github.com/Kiswari10/LIM011-fe-md-links/blob/master/img/CLI-withStatsValidate.png)
 
 ## Objetivos de aprendizaje
 
