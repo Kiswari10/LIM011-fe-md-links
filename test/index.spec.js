@@ -49,10 +49,7 @@ describe('saveRoutesOfFiles', () => {
 });
 
 const thirdOutput = '[Markdown definition](https://es.wikipedia.org/wiki/Markdown),\n'
-+ '[módulos (CommonJS)](https://nodejs.org/docs/latest-v0.10.x/api/modules.html),\n'
-+ '[file system](https://nodejs.org/api/fs.html),\n'
-+ '[path](https://nodejs.org/api/path.html),\n'
-+ '[http.get](https://nodejs.org/api/http.html#http_http_get_options_callback)';
++ '[file system](https://nodejs.org/api/fs.html)';
 
 describe('readFile', () => {
   it('debería retornar el contenido del documento de la ruta', () => {
@@ -67,27 +64,8 @@ const fourthOutput = [{
         path.join(process.cwd(), 'test', 'folder_example', 'folder_one', 'links.md'),
 },
 {
-  href: 'https://nodejs.org/docs/latest-v0.10.x/api/modules.html',
-  text: 'módulos (CommonJS)',
-  file:
-        path.join(process.cwd(), 'test', 'folder_example', 'folder_one', 'links.md'),
-},
-{
   href: 'https://nodejs.org/api/fs.html',
   text: 'file system',
-  file:
-        path.join(process.cwd(), 'test', 'folder_example', 'folder_one', 'links.md'),
-},
-{
-  href: 'https://nodejs.org/api/path.html',
-  text: 'path',
-  file:
-        path.join(process.cwd(), 'test', 'folder_example', 'folder_one', 'links.md'),
-},
-{
-  href:
- 'https://nodejs.org/api/http.html#http_http_get_options_callback',
-  text: 'http.get',
   file:
         path.join(process.cwd(), 'test', 'folder_example', 'folder_one', 'links.md'),
 },
@@ -119,33 +97,8 @@ const fifthOutput = [{
   status_message: 'ok',
 },
 {
-  href: 'https://nodejs.org/docs/latest-v0.10.x/api/modules.html',
-  text: 'módulos (CommonJS)',
-  file:
-        path.join(process.cwd(), 'test', 'folder_example', 'folder_one', 'links.md'),
-  status: 200,
-  status_message: 'ok',
-},
-{
   href: 'https://nodejs.org/api/fs.html',
   text: 'file system',
-  file:
-        path.join(process.cwd(), 'test', 'folder_example', 'folder_one', 'links.md'),
-  status: 200,
-  status_message: 'ok',
-},
-{
-  href: 'https://nodejs.org/api/path.html',
-  text: 'path',
-  file:
-        path.join(process.cwd(), 'test', 'folder_example', 'folder_one', 'links.md'),
-  status: 200,
-  status_message: 'ok',
-},
-{
-  href:
-     'https://nodejs.org/api/http.html#http_http_get_options_callback',
-  text: 'http.get',
   file:
         path.join(process.cwd(), 'test', 'folder_example', 'folder_one', 'links.md'),
   status: 200,
@@ -178,7 +131,7 @@ describe('validateLinks', () => {
   });
 });
 
-const sixthOutput = { total: 7, uniques: 6, broken: 1 };
+const sixthOutput = { total: 4, uniques: 3, broken: 1 };
 
 describe('stats', () => {
   it('debería retornar un objeto con 3 propiedades: total, uniques y broken', (done) => {
