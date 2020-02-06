@@ -19,7 +19,9 @@ Md-links es una librería que se desarrolló con la finalidad de leer y analizar
 
 ## Planificación del proyecto
 
-[Enlace a Trello - Planificacion completa](https://trello.com/invite/b/yKCon9nH/d5c2ffaee6d98acbb684e779e1b7b51d/md-links)
+![Planificacion](https://github.com/Kiswari10/LIM011-fe-md-links/blob/master/img/Planificaci%C3%B3n-Trello.png)
+
+[Enlace a Trello - Planificación completa](https://trello.com/invite/b/yKCon9nH/d5c2ffaee6d98acbb684e779e1b7b51d/md-links)
 
 ## Instalación y guía de uso de la librería
 
@@ -97,7 +99,7 @@ Para validación de los links:
 ```js
 mdLinks('test', { validate: true }).then(data => console.log(data));
 ```
-![Resultado con validación de links](https://github.com/Kiswari10/LIM011-fe-md-links/blob/master/img/mdLinks-withValidate.png)
+![Resultado con validación de links](https://github.com/Kiswari10/LIM011-fe-md-links/blob/master/img/mdLinks-whitValidate.png)
 
 ### CLI (Command Line Interface - Interfaz de Línea de Comando)
 
