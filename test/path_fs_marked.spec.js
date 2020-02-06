@@ -6,7 +6,7 @@ describe('getAbsolutePath', () => {
     expect(route.getAbsolutePath(path.join(process.cwd(), 'src'))).toBe(path.join(process.cwd(), 'src'));
   });
   it('debería retornar una ruta absoluta al pasarle una ruta relativa', () => {
-    expect(route.getAbsolutePath('./')).toBe(process.cwd());
+    expect(route.getAbsolutePath('.')).toBe(process.cwd());
   });
 });
 
