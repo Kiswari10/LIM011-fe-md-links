@@ -30,7 +30,7 @@ Md-links es una librería que se desarrolló con la finalidad de leer y analizar
 Para comenzar a usar este proyecto, lo primero que debe hacer es instalar la librería. 
 Para ello ejecute en la terminal la siguiente línea de comando: 
 
-`npm install  kiswari10/md-links`
+`npm install kiswari10/md-links`
 
 #### 2 - GUÍA DE USO
 
@@ -41,7 +41,7 @@ Esta libreria puede usarse de dos formas:
 ```js
 const mdLinks = require("md-links");
 ```
-##### La aplicación se puede ejecutar de la siguiente manera a través de la terminal:
+##### Ejecutándolo de la siguiente manera a través de la terminal:
 
 `md-links <path-to-file> [options]`
 
@@ -58,8 +58,8 @@ Donde:
 
 ##### Argumentos
 
-- `path`: Ruta absoluta o relativa al archivo o directorio. Si la ruta pasada es
-  relativa, se resuelve como relativa al directorio desde donde se invoca
+- `path`: Tipo de dato string que representa la ruta absoluta o relativa al archivo o directorio. 
+  Si la ruta pasada es relativa, se resuelve como relativa al directorio desde donde se invoca
   node - _current working directory_).
 - `options`: Un objeto con las siguientes propiedades:
   * `validate`: Booleano que determina si se desea validar los links
@@ -72,10 +72,12 @@ La función retorna una promesa (`Promise`) que resuelve un arreglo
 las siguientes propiedades:
 
 - `href`: URL encontrada.
-- `text`: Texto que aparecía dentro del link (`<a>`).
+- `text`: Texto que aparece dentro del link (`<a>`).
 - `file`: Ruta del archivo donde se encontró el link.
 
 #### Ejemplo
+
+Carga el módulo vía require:
 
 ```js
 const mdLinks = require("md-links");
