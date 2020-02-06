@@ -19,6 +19,8 @@ Md-links es una librería que se desarrolló con la finalidad de leer y analizar
 
 ## Planificación del proyecto
 
+[Enlace a Trello - Planificacion completa](https://trello.com/invite/b/yKCon9nH/d5c2ffaee6d98acbb684e779e1b7b51d/md-links)
+
 ## Instalación y guía de uso de la librería
 
 #### 1 - INSTALACIÓN
@@ -79,12 +81,12 @@ const mdLinks = require("md-links");
 Retorno por defecto:
 
 ```js
-mdLinks('test').then((data) => console.log(data));
+mdLinks('test').then(data => console.log(data));
 ```
 O tambien puede usar la opcion de validate: false,
 
 ```js
-mdLinks('test', {validate: false}).then((data) => console.log(data));
+mdLinks('test', { validate: false }).then(data => console.log(data));
 ```
 En ambos casos el resultado es:
 
@@ -93,7 +95,7 @@ En ambos casos el resultado es:
 Para validación de los links:
 
 ```js
-mdLinks('test', {validate: true}).then((data) => console.log(data));
+mdLinks('test', { validate: true }).then(data => console.log(data));
 ```
 ![Resultado con validación de links](https://github.com/Kiswari10/LIM011-fe-md-links/blob/master/img/mdLinks-withValidate.png)
 
