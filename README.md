@@ -30,7 +30,7 @@ Md-links es una librería que se desarrolló con la finalidad de leer y analizar
 Para comenzar a usar este proyecto, lo primero que debe hacer es instalar la librería. 
 Para ello ejecute en la terminal la siguiente línea de comando: 
 
-`npm install kiswari10/md-links`
+`npm install Kiswari10/md-links`
 
 #### 2 - GUÍA DE USO
 
